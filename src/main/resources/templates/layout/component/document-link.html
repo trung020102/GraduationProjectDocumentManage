@@ -1,0 +1,5 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+
+<th:block th:fragment="documentLink (documentName, uuidFileName)">
+    <div class="mb-1"><a th:href="@{/api/documents/file/${uuidFileName}}" th:text="${documentName}"></a></div>
+</th:block>

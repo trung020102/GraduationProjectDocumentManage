@@ -1,0 +1,22 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+
+<th:block th:fragment="page-footer">
+    <footer>
+        <div class="row">
+            <div class="col-xs-12 text-center nopadding">
+                <p>
+                    <span class="glyphicon glyphicon-home"></span>
+                    <th:block th:text="#{footer.organization.name}"></th:block>
+                </p>
+                <p>
+                    <span class="glyphicon glyphicon-home"></span>
+                    <th:block th:text="#{footer.organization.address}"></th:block>
+                </p>
+                <p>
+                    <span class="glyphicon glyphicon-phone"></span>
+                    <th:block th:text="#{footer.organization.contact}"></th:block>
+                </p>
+            </div>
+        </div>
+    </footer>
+</th:block>

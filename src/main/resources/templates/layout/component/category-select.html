@@ -1,0 +1,24 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+
+<th:block th:fragment="categorySelect (mainCategory)">
+    <label th:for="main-category- + ${mainCategory.id}" th:text="${mainCategory.title}"></label>
+    <span class="text-danger text-bold">*</span><br>
+    <select th:id="main-category- + ${mainCategory.id}" class="selectpicker" name="categories">
+        <th:block th:each="subCategory : ${mainCategory.subCategories}">
+            <option th:value="${subCategory.id}" th:text="${subCategory.title}"></option>
+        </th:block>
+    </select>
+</th:block>
+
+<th:block th:fragment="categorySelectForUpdating (mainCategory, document)">
+    <label th:for="main-category- + ${mainCategory.id}" th:text="${mainCategory.title}"></label>
+    <span class="text-danger text-bold">*</span><br>
+    <select th:id="main-category- + ${mainCategory.id}" class="selectpicker" name="categories">
+        <th:block th:each="subCategory : ${mainCategory.subCategories}">
+            <option th:value="${subCategory.id}"
+                    th:text="${subCategory.title}"
+                    th:selected="${document.subCategoryIds.contains(subCategory.id)}">
+            </option>
+        </th:block>
+    </select>
+</th:block>

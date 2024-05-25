@@ -1,0 +1,31 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+
+<th:block th:fragment="texts">
+    <script th:inline="javascript">
+        var ERROR_403 = [[#{error.403}]];
+
+        var chooseFileMessage = [[#{message.file.chooseFileToUpload}]];
+
+        // Element
+        var createButton = [[#{button.create}]];
+
+        // Datatable message
+        var resultCount = [[#{message.datatable.resultCount}]];
+        var noResult = [[#{message.datatable.noResult}]];
+        var menuLength = [[#{message.datatable.menuLength}]];
+        var emptyTable = [[#{message.datatable.emptyTable}]];
+
+        // User
+        var active = [[#{select.status.active}]];
+        var disabled = [[#{select.status.disabled}]];
+
+        // Category
+        var enterChildCategoryName = [[#{title.category.enterChildName}]];
+
+        // Document
+        var choosePdfFileOnly = [[#{message.file.pdfOnly}]];
+
+        // Authorization
+        var isAdminOrModerator = [[${isAdminOrModerator}]];
+    </script>
+</th:block>

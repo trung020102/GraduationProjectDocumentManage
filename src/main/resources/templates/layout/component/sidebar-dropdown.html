@@ -1,0 +1,24 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+
+<th:block th:fragment="dropdownMenu (mainCategory)">
+    <li class="nav-item menu-dropdown" th:data-main_category="${mainCategory.id}">
+        <a href="#" class="nav-link">
+            <p class="text-uppercase">
+                <th:block th:text="${mainCategory.title}"></th:block>
+                <i class="fas fa-angle-left right"></i>
+                <span class="badge badge-info right" th:text="${mainCategory.documentCount}"></span>
+            </p>
+        </a>
+        <ul class="nav nav-treeview">
+            <!-- Render sub-category list -->
+            <th:block th:each="subCategory: ${mainCategory.subCategories}">
+                <li class="nav-item" th:data-sub_category="${subCategory.id}">
+                    <a th:href="@{${documentListPath}(categoryId=${subCategory.id})}" class="nav-link">
+                        <p th:text="${subCategory.title}"></p>
+                        <span class="badge badge-warning ml-2" th:text="${subCategory.documentCount}"></span>
+                    </a>
+                </li>
+            </th:block>
+        </ul>
+    </li>
+</th:block>

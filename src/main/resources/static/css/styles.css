@@ -1,0 +1,60 @@
+a:hover {
+    cursor: pointer;
+}
+
+/* Validation error element */
+.with-validation {
+    position: relative;
+}
+
+.with-validation .error-text {
+    font-size: 13px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 10px 10px;
+    position: absolute;
+    z-index: 1;
+    left: 30%;
+    margin-left: -100px;
+    -webkit-animation: fadeInOut 2s;
+    animation: fadeInOut 5s;
+    opacity: 0;
+}
+
+.with-validation .error-text::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 0px 10px 10px 10px;
+    border-style: solid;
+    border-color: #555 transparent;
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+    }
+    16% {
+        opacity: 1;
+    }
+    84% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+/* File uploading */
+
+.border-top-grey {
+    border-top: 1px solid #4f5962;
+}
+
+.collapse-visibility {
+    visibility: collapse;
+}

@@ -1,0 +1,141 @@
+body {
+  background: #006EB7 url(../resources/static/img/Login_bg_lg.png) repeat-x;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.hitec-signin {
+  display: flex;
+  width: 1000px;
+  margin: auto;
+  overflow: hidden;
+}
+
+.hitec-col-image {
+  width: 650px;
+}
+.hitec-signin-logo {
+  margin-top: 50px;
+}
+
+.hitec-signin-logo img {
+  width: 160px;
+  height: 140px;
+}
+
+.hitec-signin-image {
+  margin-top:  55px;
+}
+
+.hitec-col-signin {
+  width: 350px;
+}
+
+.hitec-form-signin {
+  width: 320px;
+  border: 5px solid #6bb9f0;
+  background: #f7f7f7;
+  padding: 15px;
+  height: 310px;
+  margin: 205px auto 0;
+  position: relative;
+}
+
+.hitec-form-signin img {
+  border: 5px solid #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: -30px;
+  right: 20px;
+}
+
+.form-signin-heading {
+  font-family: Calibri;
+  font-size: 25px;
+  font-weight: bold;
+  color: #006eb7;
+  margin-bottom: 20px;
+}
+
+.hitec-form-signin a.forgot-password {
+  display: block;
+}
+
+.hitec-form-signin .btn-custom {
+  margin: 20px auto;
+}
+
+footer {
+  padding-top: 50px;
+  color: #fff;
+}
+
+@media only screen and (max-width: 768px) {
+  body {
+    background-image: none;
+    background-color: #006EB7;
+    height: 100vh;
+  }
+  .hitec-signin {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    margin: auto;
+    overflow: hidden;
+  }
+  .hitec-col-image {
+    width: 100%;
+  }
+  .hitec-signin-logo {
+    margin-top: 20px;
+  }
+  .hitec-signin-logo img {
+    width: 120px;
+    height: 120px;
+  }
+  .hitec-signin-image {
+    margin-top: 39px;
+    display: none;
+  }
+  .hitec-col-signin {
+    width: 100%;
+  }
+  .hitec-form-signin {
+    width: 90%;
+    border: 5px solid #6bb9f0;
+    background: #f7f7f7;
+    padding: 15px;
+    height: 370px;
+    margin: 50px auto 0;
+    position: relative;
+  }
+  .hitec-form-signin img {
+    border: 5px solid #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: -30px;
+    right: 20px;
+  }
+  .form-signin-heading {
+    font-family: Calibri;
+    font-size: 25px;
+    font-weight: bold;
+    color: #006eb7;
+    margin-bottom: 20px;
+  }
+  .hitec-form-signin a.forgot-password {
+    display: block;
+  }
+  .hitec-form-signin .btn-custom {
+    margin: 20px auto;
+  }
+  .btn-block {
+    display: block;
+    width: 100%;
+  }
+  /
+  footer {
+    padding-top: 50px;
+    color: #fff;
+  }
+}

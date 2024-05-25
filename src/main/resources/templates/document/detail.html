@@ -1,0 +1,85 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+
+<th:block th:fragment="document-detail">
+    <div class="modal fade" id="document-detail-modal" data-backdrop="false"
+         tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-top" role="document">
+            <div class="modal-content">
+                <div class="modal-header alert-primary">
+                    <h5 class="modal-title" th:text="#{title.document.detail}"></h5>
+                    <button type="button" class="close text-white" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body m-2 p-3">
+                    <table class="table table-bordered table-hover">
+                        <thead class="collapse-visibility">
+                        <tr>
+                            <th class="col-md-4"></th>
+                            <th class="col-md-8"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td th:text="#{title.documentId}"></td>
+                            <td class="document-code"></td>
+                        </tr>
+                        <tr>
+                            <td th:text="#{title.numberSymbol}"></td>
+                            <td class="number-sign"></td>
+                        </tr>
+                        <tr>
+                            <td th:text="#{title.creationDate}"></td>
+                            <td class="created-at"></td>
+                        </tr>
+                        <tr>
+                            <td th:text="#{title.dateIssued}"></td>
+                            <td class="issued-date"></td>
+                        </tr>
+                        <tr>
+                            <td th:text="#{title.documentName}"></td>
+                            <td class="document-name"></td>
+                        </tr>
+                        <tr>
+                            <td th:text="#{title.urgency}"></td>
+                            <td class="urgency-level"></td>
+                        </tr>
+                        <tr>
+                            <td th:text="#{title.documentSecurity}"></td>
+                            <td class="security-level"></td>
+                        </tr>
+                        <!-- Category rows will be rendered here, after security level row -->
+                        <tr>
+                            <td th:text="#{title.signer}"></td>
+                            <td class="signer"></td>
+                        </tr>
+                        <tr>
+                            <td th:text="#{title.recipients}"></td>
+                            <td class="recipient"></td>
+                        </tr>
+                        <tr>
+                            <td th:text="#{title.mainDocumentFile}"></td>
+                            <td class="main-document-file"></td>
+                        </tr>
+                        <tr>
+                            <td th:text="#{title.attachedDocumentFile}"></td>
+                            <td class="attached-document-file"></td>
+                        </tr>
+                        <tr>
+                            <td th:text="#{title.documentRelated}"></td>
+                            <td class="related-document"></td>
+                        </tr>
+                        <tr>
+                            <td th:text="#{title.numberPage}"></td>
+                            <td class="page-number"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" th:text="#{button.close}"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>

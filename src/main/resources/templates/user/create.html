@@ -1,0 +1,60 @@
+<html lang="vi"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layout/app"
+>
+
+<th:block layout:fragment="page-header-title" th:text="#{title.user.create}"></th:block>
+<th:block layout:fragment="page-breadcrumb" th:text="#{title.user.create}"></th:block>
+
+<th:block layout:fragment="content-body">
+    <button id="btn-import" class="btn btn-danger float-right" th:text="#{title.importFile}" data-toggle="modal"
+            data-target="#file-uploading-modal"></button>
+    <form id="user-register-form" autocomplete="off" class="w-50 m-auto">
+        <div class="card-body">
+            <div class="form-group with-validation">
+                <label for="username" th:text="#{title.username}"></label>
+                <span class="text-danger text-bold">*</span>
+                <input type="text" name="username" class="form-control" id="username"
+                       th:placeholder="#{title.enterUsername}" required>
+            </div>
+            <div class="form-group with-validation">
+                <label for="password" th:text="#{title.password}"></label>
+                <span class="text-danger text-bold">*</span>
+                <input type="password" name="password" class="form-control" id="password"
+                       th:placeholder="#{title.enterPassword}" required>
+            </div>
+            <div class="form-group with-validation">
+                <label for="full-name" th:text="#{title.fullName}"></label>
+                <input type="text" name="fullName" class="form-control" id="full-name"
+                       th:placeholder="#{title.enterFullName}">
+            </div>
+            <div class="form-group with-validation">
+                <label for="role-code" th:text="#{title.role}"></label>
+                <span class="text-danger text-bold">*</span>
+                <select name="roleCode" id="role-code" class="form-control" required>
+                    <option value="" th:text="#{title.selectRole}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="card-footer bg-white">
+            <button id="btn-create-user" type="button" class="btn btn-primary" th:text="#{button.register}"></button>
+            <button id="btn-reset-user" type="button" class="btn btn-secondary" th:title="#{button.reset}">
+                <i class="fas fa-redo"></i>
+            </button>
+            <a href="/users" class="btn btn-info" th:title="#{button.back}">
+                <i class="fas fa-arrow-left text-white"></i>
+            </a>
+        </div>
+    </form>
+    <th:block th:replace="~{layout/modal/file-uploading :: file-uploading}"></th:block>
+</th:block>
+
+<th:block layout:fragment="user-script">
+    <script type="module">
+        import {UserCreation} from '/js/user.js';
+
+        UserCreation.init();
+    </script>
+</th:block>
+</html>

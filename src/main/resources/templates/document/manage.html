@@ -1,0 +1,89 @@
+<html lang="vi"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layout/app"
+>
+
+<th:block layout:fragment="content-style">
+    <link href="/css/document.css" rel="stylesheet">
+</th:block>
+
+<th:block layout:fragment="page-header-title" th:text="#{title.document.manageDocument}"></th:block>
+<th:block layout:fragment="page-breadcrumb" th:text="#{title.document.manageDocument}"></th:block>
+
+<th:block layout:fragment="content-body">
+    <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
+        <!-- search,fliter -->
+        <div class="row d-flex justify-content-between">
+            <div class="col-md-3 offset-md-1 ml-0">
+                <div class="form-group">
+                    <div class="input-group input-group-lg">
+                        <input id="keyword" type="search" class="form-control form-control-lg"
+                               th:placeholder="#{message.document.enter.keyword}">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md d-flex">
+                <div style="margin-right: 2%">
+                    <input id="start-date" type="text" class="datepicker form-control-lg "
+                           th:placeholder="#{message.filter.enter.startDate}">
+                </div>
+                <div>
+                    <input id="end-date" type="text" class="datepicker form-control-lg"
+                           th:placeholder="#{message.filter.enter.endDate}">
+                </div>
+                <div class="col-md-4">
+                    <button id="filter-document" class="btn btn-info btn-lg" th:text="#{button.find}"></button>
+                </div>
+            </div>
+            <!-- Authorize for ADMIN and MODERATOR only -->
+            <div class="col-md-auto" th:if="${isAdminOrModerator}">
+                <a href="/document/create" class="btn btn-primary btn-lg" th:text="#{button.createDocument}"></a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 table-responsive">
+                <table id="document-list-table" class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th th:text="#{title.ordinalNumber}"></th>
+                        <th th:text="#{title.documentId}"></th>
+                        <th th:text="#{title.numberSymbol}"></th>
+                        <th th:text="#{title.dateIssued}"></th>
+                        <th class="text-center align-middle" th:text="#{title.documentName}"></th>
+                        <th th:text="#{title.action}"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <!-- This table is used for USER's home page -->
+                <table id="user-document-list-table" class="table table-bordered table-hover" hidden>
+                    <thead>
+                    <tr>
+                        <th th:text="#{title.ordinalNumber}"></th>
+                        <th th:text="#{title.numberSymbol}"></th>
+                        <th th:text="#{title.dateIssued}"></th>
+                        <th class="text-center" th:text="#{title.documentName}"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <th:block th:replace="~{document/detail :: document-detail}"></th:block>
+    <th:block th:replace="~{layout/modal/delete-document-confirm :: delete-document-confirm}"></th:block>
+</th:block>
+
+<th:block layout:fragment="document-script">
+    <script type="module" src="/js/document.js"></script>
+    <script type="module">
+        import {DocumentList, DocumentDetail} from '/js/document.js';
+
+        DocumentList.init();
+        DocumentDetail.init();
+    </script>
+</th:block>
+</html>

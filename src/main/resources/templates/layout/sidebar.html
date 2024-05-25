@@ -1,0 +1,117 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="vi" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<th:block th:fragment="page-sidebar">
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <!-- Brand Logo -->
+        <a href="/home" class="brand-link">
+            <img src="/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"/>
+            <span class="brand-text font-weight-light" th:text="#{title.documentManagement}"></span>
+        </a>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- Sidebar user panel (optional) -->
+            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="image">
+                    <img th:src="@{'/api/users/getAvatar/'+ ${user.avatar}}" class="img-circle elevation-2" alt=""
+                         onerror="this.onerror=null; this.src='/api/users/getAvatar/default.png';">
+                </div>
+                <div class="info">
+                    <a href="/users/profile" class="d-block"
+                       th:text="${user.fullName} != '' ? ${user.fullName} : ${user.username}"></a>
+                </div>
+            </div>
+
+            <!-- Sidebar Search -->
+<!--            <div class="form-inline">-->
+<!--                <div class="input-group" data-widget="sidebar-search">-->
+<!--                    <input class="form-control form-control-sidebar" type="search" placeholder="Search"-->
+<!--                           aria-label="Search">-->
+<!--                    <div class="input-group-append">-->
+<!--                        <button class="btn btn-sidebar">-->
+<!--                            <i class="fas fa-search fa-fw"></i>-->
+<!--                        </button>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+            <!-- Sidebar Menu -->
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                    data-accordion="false">
+                    <!-- New Document Menu -->
+<!--                    <li class="nav-item menu-dropdown">-->
+<!--                        <a href="#" class="nav-link">-->
+<!--                            <p class="text-uppercase">Văn bản mới-->
+<!--                                <span class="right badge badge-danger">New</span>-->
+<!--                            </p>-->
+<!--                        </a>-->
+<!--                    </li>-->
+
+                    <!-- Category Menu -->
+                    <div id="category-menu">
+                        <th:block th:each="mainCategory: ${categories}">
+                            <th:block th:replace="~{layout/component/sidebar-dropdown :: dropdownMenu (${mainCategory})}">
+                            </th:block>
+                        </th:block>
+                    </div>
+                    <!-- Category Menu -->
+
+                    <!-- Management Menu -->
+                    <li class="nav-item menu-dropdown border-top-grey mt-3" th:if="${isAdminOrModerator}">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-tasks"></i>
+                            <p>
+                                <th:block th:text="#{title.manage}"></th:block>
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/document/manage" class="nav-link">
+                                    <p th:text="#{title.document.manage}"></p>
+                                </a>
+                            </li>
+                            <!-- Authorize for ADMIN only -->
+                            <li class="nav-item" sec:authorize="hasAnyAuthority(T(com.doc.mamagement.security.RoleAuthorization).CODE_ADMIN)">
+                                <a href="/users" class="nav-link">
+                                    <p th:text="#{title.user.manage}"></p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/categories" class="nav-link">
+                                    <p th:text="#{title.category.manage}"></p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- Management Menu -->
+
+                    <!-- Log-out -->
+                    <li class="nav-item menu-dropdown border-top-grey mt-3">
+                        <a href="/logout" class="nav-link">
+                            <i class="nav-icon fas fa-power-off"></i>
+                            <p th:text="#{title.logOut}"></p>
+                        </a>
+                    </li>
+                    <!-- Log-out -->
+                </ul>
+            </nav>
+            <!-- /.sidebar-menu -->
+        </div>
+        <!-- /.sidebar -->
+    </aside>
+</th:block>
+<aside id="sidebar" class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Sidebar content -->
+</aside>
+
+<!-- Thêm nút điều hướng để mở/collapse sidebar -->
+<button class="btn btn-primary" onclick="toggleSidebar()">Toggle Sidebar</button>
+
+<script>
+    function toggleSidebar() {
+        var sidebar = document.getElementById('sidebar');
+        sidebar.classList.toggle('sidebar-collapse');
+    }
+</script>

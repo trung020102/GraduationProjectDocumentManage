@@ -1,0 +1,87 @@
+<html lang="vi"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layout/app"
+>
+
+<th:block layout:fragment="content-style">
+    <link rel="stylesheet" th:href="@{/css/user.css}"/>
+</th:block>
+
+<th:block layout:fragment="page-header-title" th:text="#{title.user.manage}"></th:block>
+<th:block layout:fragment="page-breadcrumb" th:text="#{title.user.manage}"></th:block>
+
+<th:block layout:fragment="content-body">
+    <!--   body table hiển thị các user   -->
+    <div class="row mb-3 d-flex">
+        <div class="col-4">
+            <div class="input-group">
+                <input id="search-input" type="search" class="form-control"
+                       th:placeholder="#{placeholder.userList.search}">
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-default">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col d-flex">
+            <div class="mr-2">
+                <select id="role-select" class="select2 select2-hidden-accessible w-50"
+                        tabindex="-1" aria-hidden="true" th:data-label="#{title.selectRole}" multiple>
+                    <th:block th:each="userRole: ${userRoles}">
+                        <option th:value="${userRole.code}" th:text="${userRole.name}"></option>
+                    </th:block>
+                </select>
+            </div>
+            <div>
+                <select id="status-select" class="select2 select2-hidden-accessible w-50"
+                        tabindex="-1" aria-hidden="true" th:data-label="#{title.selectStatus}" multiple>
+                    <option value="false" th:text="#{select.status.active}"></option>
+                    <option value="true" th:text="#{select.status.disabled}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="col">
+            <button id="search-submit-btn" class="btn btn-info" type="button" th:text="#{button.find}"></button>
+        </div>
+        <div class="col-md-auto" th:if="${isAdminOrModerator}">
+            <a href="/users/create" class="btn btn-primary" th:text="#{button.create}"></a>
+        </div>
+    </div>
+
+    <div class="dataTables_wrapper dt-bootstrap4">
+        <div class="row">
+            <div class="col-sm-12">
+                <table id="user-list-table"
+                       class="table table-sm table-bordered table-hover dataTable dtr-inline"
+                       aria-describedby="example2_info">
+                    <thead>
+                        <tr class="text-center">
+                            <th th:text="#{title.ordinalNumber}"></th>
+                            <th th:text="#{title.username}"></th>
+                            <th th:text="#{title.fullName}"></th>
+                            <th th:text="#{title.role}"></th>
+                            <th th:text="#{title.creationDate}"></th>
+                            <th th:text="#{title.status}"></th>
+                            <th th:text="#{title.action}"></th>
+                        </tr>
+                    </thead>.
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- The Modal edit-->
+    <th:block th:replace="~{layout/modal/user :: edit-user}"></th:block>
+</th:block>
+
+<th:block layout:fragment="user-script">
+    <script type="module">
+        import {UserList} from '/js/user.js';
+
+        UserList.init();
+    </script>
+</th:block>
+</html>

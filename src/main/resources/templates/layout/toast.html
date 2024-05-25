@@ -1,0 +1,42 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+
+<th:block th:fragment="message-toast">
+    <div id="error-toast" role="alert" aria-live="assertive" aria-atomic="true"
+         class="toast align-items-center text-white bg-danger border-0 position-absolute end-0 top-0"
+    >
+        <div class="d-flex">
+            <div class="toast-body"></div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                    aria-label="Close"></button>
+        </div>
+    </div>
+    <div id="success-toast" role="alert" aria-live="assertive" aria-atomic="true"
+         class="toast align-items-center text-white bg-success border-0 position-absolute end-0 top-0"
+    >
+        <div class="d-flex">
+            <div class="toast-body"></div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                    aria-label="Close"></button>
+        </div>
+    </div>
+</th:block>
+
+<th:block th:fragment="message-toast-bootstrap4">
+    <div id="error-toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000"
+         class="toast align-items-center text-white bg-danger border-0 position-absolute end-0 top-0"
+         style="z-index: 100;"
+    >
+        <div class="toast-body">
+
+        </div>
+    </div>
+
+    <div id="success-toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000"
+         class="toast align-items-center text-white bg-success border-0 position-absolute end-0 top-0"
+         style="z-index: 100;"
+    >
+        <div class="toast-body">
+
+        </div>
+    </div>
+</th:block>

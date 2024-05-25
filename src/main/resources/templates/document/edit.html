@@ -1,0 +1,190 @@
+<html lang="vi"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layout/app"
+>
+
+<th:block layout:fragment="content-style">
+    <link href="/css/document.css" rel="stylesheet">
+</th:block>
+
+<th:block layout:fragment="page-header-title" th:text="#{title.document.edit}"></th:block>
+<th:block layout:fragment="page-breadcrumb" th:text="#{title.document.edit}"></th:block>
+
+<th:block layout:fragment="content-body">
+    <div id="update-document-area">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group with-validation">
+                    <label for="id-document" th:text="#{title.documentId}"></label>
+                    <span class="text-danger text-bold">*</span>
+                    <input type="text" id="id-document" class="form-control"
+                           name="code" th:value="${document.code}" disabled>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group with-validation">
+                    <label for="number-symbol" th:text="#{title.numberSymbol}"></label>
+                    <span class="text-danger text-bold">*</span>
+                    <input type="text" class="form-control" id="number-symbol"
+                           name="numberSign" th:value="${document.numberSign}">
+                </div>
+            </div>
+            <div class="col-sm-4 with-validation">
+                <label for="date-issued" th:text="#{title.dateIssued}"></label>
+                <span class="text-danger text-bold">*</span>
+                <input id="date-issued" class="form-control" type="date"
+                       name="issuedDate" th:value="${document.issuedDate}">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group with-validation">
+                    <label for="urgency-level" th:text="#{title.urgency}"></label>
+                    <span class="text-danger text-bold">*</span>
+                    <select id="urgency-level" class="selectpicker" name="urgencyLevel">
+                        <option th:value="#{title.urgencyLevel.option.normal}"
+                                th:text="#{title.urgencyLevel.option.normal}"
+                                th:selected="#{title.urgencyLevel.option.normal} == ${document.urgencyLevel}">
+                        </option>
+                        <option th:value="#{title.urgencyLevel.option.urgent}"
+                                th:text="#{title.urgencyLevel.option.urgent}"
+                                th:selected="#{title.urgencyLevel.option.urgent} == ${document.urgencyLevel}">
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group with-validation">
+                    <label for="security-level" th:text="#{title.documentSecurity}"></label>
+                    <span class="text-danger text-bold">*</span>
+                    <select id="security-level" class="selectpicker" name="securityLevel">
+                        <option th:value="#{title.securityLevel.option.normal}"
+                                th:text="#{title.securityLevel.option.normal}"
+                                th:selected="#{title.securityLevel.option.normal} == ${document.securityLevel}">
+                        </option>
+                        <option th:value="#{title.securityLevel.option.security}"
+                                th:text="#{title.securityLevel.option.security}"
+                                th:selected="#{title.securityLevel.option.security} == ${document.securityLevel}">
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <label for="number-page" th:text="#{title.numberPage}"></label>
+                <input id="number-page" class="form-control" type="number" th:value="${document.pageNumber}" readonly>
+            </div>
+        </div>
+        <div class="row">
+            <th:block th:each="mainCategory: ${categories}">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <th:block
+                                th:replace="~{layout/component/category-select :: categorySelectForUpdating (${mainCategory}, ${document})}">
+                        </th:block>
+                    </div>
+                </div>
+            </th:block>
+        </div>
+        <div class="row">
+            <div class="col-6 with-validation">
+                <label for="document-name" th:text="#{title.documentName}"></label>
+                <span class="text-danger text-bold">*</span><br>
+                <textarea id="document-name" name="title" class="form-control document-name"
+                          th:placeholder="#{title.documentName}" th:text="${document.title}">
+                </textarea>
+            </div>
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-6 with-validation">
+                        <label for="main-document-file" th:text="#{title.mainDocumentFile}"></label>
+                        <span class="text-danger text-bold">*</span><br>
+                        <div id="old-main-document-file">
+                            <th:block th:replace="~{layout/component/document-link :: documentLink (
+                                            ${document.mainDocumentFile.originalFileName},
+                                            ${document.mainDocumentFile.uuidFileName}
+                                        )}"></th:block>
+                        </div>
+                        <input id="main-document-file" type="file" class="form-control import-file-doc" accept=".pdf"
+                               name="mainDocumentFile">
+                    </div>
+                    <div class="col-6">
+                        <label for="attached-document-file" th:text="#{title.attachedDocumentFile}"></label><br>
+                        <div id="old-attached-document-file">
+                            <th:block th:each="attachedFile: ${document.attachedDocumentFiles}">
+                                <th:block th:replace="~{layout/component/document-link :: documentLink (
+                                        ${attachedFile.originalFileName},
+                                        ${attachedFile.uuidFileName}
+                                    )}"></th:block>
+                            </th:block>
+                        </div>
+                        <input id="attached-document-file" type="file" class="form-control import-file-doc" multiple>
+                    </div>
+                </div>
+                <div class="form-group with-validation">
+                    <label for="document-related" th:text="#{title.documentRelated}"></label><br>
+                    <select id="document-related" name="relatedDocumentCodes" class="selectpicker"
+                            data-live-search="true" data-actions-box="true" multiple>
+                        <th:block th:each="item: ${documentSelection}">
+                            <option th:value="${item.code}"
+                                    th:with="titleLength=${item.title.length()}"
+                                    th:text="${item.title.substring(0, T(java.lang.Math).min(titleLength, 70))
+                                                + (titleLength <= 70 ? '' :'...')}"
+                                    th:title="${item.title}"
+                                    th:disabled="${document.code == item.code}"
+                                    th:selected="${document.relatedDocumentCodes.contains(item.code)}">
+                            </option>
+                        </th:block>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-sm-4 with-validation">
+                <label for="signer" th:text="#{title.signer}"></label>
+                <span class="text-danger text-bold">*</span><br>
+                <input id="signer" name="signer" type="text" class="form-control" th:value="${document.signer}">
+            </div>
+            <div class="col-sm-4 with-validation">
+                <label for="recipients" th:text="#{title.recipients}"></label>
+                <input id="recipients" name="recipient" type="text" class="form-control"
+                       th:value="${document.recipient}">
+            </div>
+            <div class="col-sm-4 with-validation">
+                <label for="viewer" th:text="#{title.viewer}"></label>
+                <span class="text-danger text-bold">*</span><br>
+                <select id="viewer" name="viewers" class="selectpicker" data-live-search="true"
+                        data-actions-box="true" multiple>
+                    <th:block th:each="user: ${userSelection}">
+                        <option th:value="${user.id}"
+                                th:text="${user.fullName} + '(' + ${user.username} + ')' "
+                                th:selected="${document.viewerIds.contains(user.id)}">
+                        </option>
+                    </th:block>
+                </select>
+            </div>
+        </div>
+        <div class="card-footer bg-white d-flex justify-content-center ">
+            <button id="btn-update-document" type="button" class="btn btn-primary"
+                    th:text="#{button.updateDocument}" th:data-document_code="${document.code}"></button>
+            <button id="btn-reset-document" type="button" class="btn btn-secondary ml-3">
+                <i class="fas fa-redo"></i>
+            </button>
+        </div>
+    </div>
+</th:block>
+
+<th:block layout:fragment="document-script">
+    <script type="module" src="/js/document.js"></script>
+    <script th:inline="javascript" type="module">
+        import {DocumentConstant, DocumentUpdating} from "/js/document.js";
+        import {LocalStorage} from "/js/app.js";
+
+        DocumentUpdating.init();
+
+        const currentDocument = [[${document}]];
+        LocalStorage.setJsonItem(DocumentConstant.mainDocumentFileData, currentDocument.mainDocumentFile);
+        LocalStorage.setJsonItem(DocumentConstant.attachedDocumentFileData, currentDocument.attachedDocumentFiles);
+    </script>
+</th:block>
+</html>

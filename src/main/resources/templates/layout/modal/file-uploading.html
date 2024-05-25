@@ -1,0 +1,23 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+
+<th:block th:fragment="file-uploading">
+    <div class="modal fade" id="file-uploading-modal" data-backdrop="false" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-top" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" th:text="#{title.importFile}"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="file">
+                    <a id="link-download-sample" href="javascript:void(0);" th:text="#{title.downloadFileSample}"></a>
+                </div>
+                <div class="modal-footer">
+                    <button id="btn-submit-import" type="button" class="btn btn-primary" th:text="#{button.save}"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>

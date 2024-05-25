@@ -1,0 +1,86 @@
+<html lang="vi"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layout/app"
+>
+
+<th:block layout:fragment="content-style">
+    <link rel="stylesheet" th:href="@{/css/user.css}"/>
+</th:block>
+
+<th:block layout:fragment="page-header-title" th:text="#{title.user.profile}"></th:block>
+<th:block layout:fragment="page-breadcrumb" th:text="#{title.user.profile}"></th:block>
+
+<th:block layout:fragment="content-body">
+    <!-- Profile Image -->
+    <div class="card card-primary card-outline col-5 m-auto">
+        <div class="card-body box-profile col-8 m-auto">
+            <form id="user-info-form">
+                <div class="avatar-wrapper">
+                    <div class="with-validation">
+                        <input name="avatar" type="hidden" disabled/>
+                    </div>
+                    <img class="profile-pic" th:src="@{'/api/users/getAvatar/'+ ${user.avatar}}" alt=""/>
+                    <div class="upload-button">
+                        <i class="fas fa-arrow-circle-up" aria-hidden="true"></i>
+                    </div>
+                    <input id="user-avatar" name="avatar" class="file-upload" type="file" accept="image/*"/>
+                </div>
+                <div class="d-flex">
+                    <button id="update-avatar-btn" type="button" hidden
+                            class="btn btn-sm btn-outline-primary m-auto rounded-circle">
+                        <i class="fa fa-check"></i>
+                    </button>
+                </div>
+                <div class="d-flex justify-content-center my-3 with-validation">
+                    <input id="user-full-name" type="text" class="edit-input form-control" name="fullName"
+                           th:value="${user.fullName}" hidden>
+                    <h3 class="edit-input-text profile-username my-auto text-center mr-1"
+                        th:text="${user.fullName}"></h3>
+                    <a id="edit-full-name-btn" class="edit-input-button emy-auto far fa-edit ml-1"></a>
+                </div>
+
+                <p class="text-muted text-center" th:text="${user.username}"></p>
+
+                <ul class="list-group list-group-unbordered mb-3">
+                    <li class="list-group-item">
+                        <b th:text="#{title.role}"></b>
+                        <span class="text-primary float-right" th:text="${user.role}"></span>
+                    </li>
+                    <li class="list-group-item">
+                        <b th:text="#{title.email}"></b>
+                        <div class="d-flex float-right with-validation">
+                            <input id="user-email" type="text" class="edit-input form-control form-control-sm"
+                                   name="email"
+                                   th:value="${user.email}" hidden>
+                            <span class="edit-input-text text-primary" th:text="${user.email}"></span>
+                            <a class="edit-input-button my-auto far fa-edit ml-1"></a>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <b th:text="#{title.creationDate}"></b>
+                        <span class="text-primary float-right" th:text="${user.createdAt}"></span>
+                    </li>
+                    <li class="list-group-item">
+                        <a class="text-primary float-right font-weight-bold" th:text="#{title.changePassword}"
+                           data-toggle="modal" data-target="#change-own-password-modal"></a>
+                    </li>
+                </ul>
+            </form>
+            <button id="btn-update-user" type="button" class="submit-edit-button btn btn-primary btn-block"
+                    th:text="#{button.save}" hidden=""></button>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+    <th:block th:replace="~{layout/modal/user :: change-own-password}"></th:block>
+</th:block>
+
+<th:block layout:fragment="user-script">
+    <script type="module">
+        import {UserUpdating} from '/js/user.js';
+
+        UserUpdating.init();
+    </script>
+</th:block>
+</html>

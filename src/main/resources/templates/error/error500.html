@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/error/error-layout}" lang="en">
+
+<th:block layout:fragment="page-title">
+    <title>500 Internal Server Error</title>
+</th:block>
+
+<th:block layout:fragment="page-content">
+    <div class="error-page">
+        <h2 class="headline text-warning">500</h2>
+        <div class="error-content">
+            <h3><i class="fas fa-exclamation-triangle text-warning"></i>Internal Server Error</h3>
+            <p>
+                We're sorry, but something went wrong.
+                We are working on it and we'll get it fixed as soon as we can.
+                You can <a href="/home">return to home page</a> or try again later.
+            </p>
+        </div>
+    </div>
+</th:block>
+
+</html>

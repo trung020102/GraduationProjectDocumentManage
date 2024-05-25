@@ -1,0 +1,36 @@
+<html lang="vi"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layout/app"
+>
+
+<th:block layout:fragment="page-header-title" th:text="#{title.category.manage}"></th:block>
+<th:block layout:fragment="page-breadcrumb" th:text="#{title.category.manage}"></th:block>
+
+<th:block layout:fragment="content-body">
+    <div id="category-list">
+        <th:block th:each="mainCategory: ${categories}">
+            <th:block th:replace="~{layout/component/collapse-category :: collapseCategory (${mainCategory})}">
+            </th:block>
+        </th:block>
+    </div>
+    <div class="card card-primary card-outline col-4 mx-auto p-0 create-main-category-card">
+        <div class="card-body">
+            <div class="input-group with-validation">
+                <input id="new-main-category-title" type="text" class="form-control" name="title"
+                       th:placeholder="#{title.category.enterParentName}">
+                <div class="input-group-append">
+                    <button id="create-main-category-btn" type="button" class="btn btn-primary"
+                            th:text="#{button.create}" onclick="createMainCategory()"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <th:block th:replace="~{layout/modal/delete-confirm :: delete-confirm}"></th:block>
+</th:block>
+
+<th:block layout:fragment="category-script">
+    <script type="module" src="/js/category.js"></script>
+</th:block>
+
+</html>

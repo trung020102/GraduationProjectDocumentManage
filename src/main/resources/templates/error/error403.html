@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="/error/error-layout" lang="en">
+
+<th:block layout:fragment="page-title">
+    <title>403 Forbidden</title>
+</th:block>
+
+<th:block layout:fragment="page-content">
+    <div class="error-page">
+        <h2 class="headline text-warning"> 403</h2>
+        <div class="error-content">
+            <h3><i class="fas fa-exclamation-triangle text-warning"></i>Forbidden</h3>
+            <p>
+                You are not allowed to access this page.
+                Please <a href="/home">return to home page</a> or contact to your administrator.
+            </p>
+        </div>
+    </div>
+</th:block>
+
+</html>

@@ -1,0 +1,35 @@
+#create-document-area .m-0 {
+    margin: 0;
+}
+
+.import-file-doc {
+    background-color: white; /* Màu nền */
+    color: black; /* Màu chữ */
+    border: none; /* Loại bỏ đường viền */
+    border-radius: 4px; /* Bo tròn góc */
+    cursor: pointer; /* Con trỏ tay khi di chuột qua */
+    transition: background-color 0.3s; /* Hiệu ứng chuyển đổi màu nền */
+}
+
+/* Hiệu ứng hover cho nút tải lên */
+.import-file-doc:hover {
+    background-color: #0056b3; /* Màu nền hover */
+    color: white;
+}
+
+#document-detail-modal table tr td:first-child {
+    color: black;
+    font-weight: bold;
+}
+
+.open-document-detail {
+    color: black;
+}
+
+.open-document-detail:hover {
+    color: red;
+}
+
+#document-name {
+    height: 80%;
+}

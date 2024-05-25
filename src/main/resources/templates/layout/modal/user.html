@@ -1,0 +1,97 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+
+<th:block th:fragment="change-own-password">
+    <div class="modal fade" id="change-own-password-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-top" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" th:text="#{title.changePassword}"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="user-change-own-password-form">
+                        <div class="form-group with-validation">
+                            <label for="old-password" th:text="#{title.oldPassword}"></label>
+                            <span class="text-danger text-bold">*</span>
+                            <input type="password" class="form-control" id="old-password" name="oldPassword"
+                                   th:placeholder="#{title.enterOldPassword}">
+                        </div>
+                        <div class="form-group with-validation">
+                            <label for="new-password" th:text="#{title.newPassword}"></label>
+                            <span class="text-danger text-bold">*</span>
+                            <input type="password" class="form-control" id="new-password" name="newPassword"
+                                   th:placeholder="#{title.enterNewPassword}">
+                        </div>
+                        <div class="form-group with-validation">
+                            <input type="password" class="form-control" id="confirm-new-password"
+                                   name="confirmNewPassword"
+                                   th:placeholder="#{title.confirmNewPassword}">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button id="btn-submit-change-password" type="button" class="btn btn-primary"
+                            th:text="#{button.save}"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+
+<th:block th:fragment="edit-user">
+    <div class="modal fade" id="edit-user-modal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="false">
+        <div class="modal-dialog modal-dialog-top" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" th:text="#{title.updateUserInfo}"></h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-2">
+                            <label th:text="#{title.username}"></label>
+                            <input class="form-control username-input" type="text" disabled>
+                        </div>
+                        <div class="mb-2">
+                            <label th:text="#{title.fullName}"></label>
+                            <input class="form-control full-name-input" type="text" disabled>
+                        </div>
+                        <div class="mb-2">
+                            <label th:text="#{title.email}"></label>
+                            <input class="form-control email-input" type="text" disabled>
+                        </div>
+                        <div class="mb-2 with-validation">
+                            <label th:text="#{title.newPassword}"></label>
+                            <input class="form-control new-password-input" type="password" name="newPassword">
+                        </div>
+                        <div class="mb-2 with-validation">
+                            <label th:text="#{title.role}"></label>
+                            <select name="role" class="form-control role-select" style="width: 100%"
+                                    th:data-label="#{title.selectRole}">
+                                <th:block th:each="userRole: ${userRoles}">
+                                    <option th:value="${userRole.code}" th:text="${userRole.name}"></option>
+                                </th:block>
+                            </select>
+                        </div>
+                        <div class="mb-2 with-validation">
+                            <label th:text="#{title.status}"></label>
+                            <select name="status" class="form-control status-select" style="width: 100%"
+                                    th:data-label="#{title.selectStatus}">
+                                <option value="false" th:text="#{select.status.active}"></option>
+                                <option value="true" th:text="#{select.status.disabled}"></option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-save"
+                            th:text="#{button.save}"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
